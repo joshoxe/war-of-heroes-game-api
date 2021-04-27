@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WarOfHeroesGameAPI.Data;
+using WarOfHeroesGameAPI.Data.Entities;
 
 namespace WarOfHeroesGameAPI
 {
@@ -24,7 +26,8 @@ namespace WarOfHeroesGameAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllers();
-            services.AddScoped<IReader>(_ => new HeroReader("./heroes.csv"));
+            services.AddDbContext<HeroContext>();
+            services.AddScoped<IHeroRepository, HeroRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
