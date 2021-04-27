@@ -355,3 +355,4 @@ MigrationBackup/
 Deployment/.terraform
 
 **/*.secrets.json
+**/bin/*
