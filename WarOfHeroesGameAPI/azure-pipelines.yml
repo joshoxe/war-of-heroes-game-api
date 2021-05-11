@@ -1,0 +1,61 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-18.04'
+
+variables:
+  - group: Deployment
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildAPI
+        steps:
+         - checkout: self
+         - task: DotNetCoreCLI@2
+           inputs:
+              command: 'publish'
+              arguments: "--output $(System.DefaultWorkingDirectory)/publish_output"
+              projects: '**/*.csproj'
+              publishWebProjects: false
+              modifyOutputPath: true
+              zipAfterPublish: true
+         - task: PublishPipelineArtifact@1
+           inputs:
+            targetPath: "$(System.DefaultWorkingDirectory)/publish_output"
+            artifact: "drop"
+            publishLocation: "pipeline"
+  - stage: Deploy
+    jobs:
+      - job: Deploy
+        steps:
+        - checkout: self
+        - script: |
+            echo "Subscription ID $(SUBSCRIPTION-ID)"
+            echo "Tenant ID  $(TERRAFORM-TENANT-ID)"
+            echo "Client ID  $(TERRAFORM-CLIENT-ID)"
+            echo "Access Key  $(TF-ACCESS-KEY)"
+            echo "Client Secret $(TERRAFORM-CLIENT-SECRET)"
+            terraform init
+            terraform plan
+            terraform apply -auto-approve
+          workingDirectory: "$(System.DefaultWorkingDirectory)/WarOfHeroesGameAPI/Deployment/"
+          env:
+            ARM_SUBSCRIPTION_ID: $(SUBSCRIPTION-ID)
+            ARM_TENANT_ID: $(TERRAFORM-TENANT-ID)      
+            ARM_ACCESS_KEY: $(TF-ACCESS-KEY)        
+            ARM_CLIENT_ID: $(TERRAFORM-CLIENT-ID)
+            ARM_CLIENT_SECRET: $(TERRAFORM-CLIENT-SECRET)
+        - task: DownloadPipelineArtifact@2
+          inputs:
+              buildType: "current"
+              artifactName: "drop"
+              targetPath: "$(System.DefaultWorkingDirectory)"
+        - task: AzureRmWebAppDeployment@4
+          inputs:
+              ConnectionType: "AzureRM"
+              azureSubscription: "warOfHeroes"
+              appType: "webApp"
+              WebAppName: "warOfHeroesHeroes"
+              packageForLinux: "$(System.DefaultWorkingDirectory)/WarOfHeroesGameAPI.zip"
