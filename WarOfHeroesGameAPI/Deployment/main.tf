@@ -35,7 +35,7 @@ resource "azurerm_app_service_plan" "app_service_plan" {
     }
 }
 
-resource "azurerm_app_service" "app_service" {
+resource "azurerm_app_service" "users_app_service" {
     name                = "warOfHeroesUsers"
     location            = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
@@ -46,7 +46,7 @@ resource "azurerm_app_service" "app_service" {
     }
 }
 
-resource "azurerm_app_service" "app_service" {
+resource "azurerm_app_service" "heroes_app_service" {
     name                = "warOfHeroesHeroes"
     location            = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
