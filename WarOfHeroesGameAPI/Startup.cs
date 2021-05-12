@@ -17,6 +17,8 @@ namespace WarOfHeroesGameAPI
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
@@ -27,6 +29,12 @@ namespace WarOfHeroesGameAPI
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllers();
             services.AddDbContext<HeroContext>();
+            services.AddCors(options => {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder => {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
             services.AddScoped<IHeroRepository, HeroRepository>();
         }
 
@@ -39,7 +47,7 @@ namespace WarOfHeroesGameAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {
