@@ -45,6 +45,10 @@ resource "azurerm_app_service" "heroes_app_service" {
     site_config {
         windows_fx_version = "DOTNETCORE|3.1"
     }
+    connection_string {
+      name = "HeroDb"
+      value = azurerm_sql_server.heroes_db.connection_string
+    }
 }
 
 resource "azurerm_sql_server" "heroes_db" {
