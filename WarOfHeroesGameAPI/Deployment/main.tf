@@ -52,7 +52,7 @@ resource "azurerm_app_service" "heroes_app_service" {
 }
 
 resource "azurerm_sql_server" "heroes_db" {
-  name                         = "HeroesDb"
+  name                         = "heroesdb"
   resource_group_name          = azurerm_resource_group.rg.name
   location                     = azurerm_resource_group.rg.location
   version                      = "12.0"
