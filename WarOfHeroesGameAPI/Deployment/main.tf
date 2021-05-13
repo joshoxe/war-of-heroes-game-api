@@ -54,7 +54,7 @@ resource "azurerm_app_service" "heroes_app_service" {
 
 
 resource "azurerm_sql_server" "heroes_db_server" {
-  name                         = "josh_heroes_server_123"
+  name                         = "josh-heroes-server-123"
   resource_group_name          = azurerm_resource_group.rg.name
   location                     = "East US"
   version                      = "12.0"
@@ -67,7 +67,7 @@ resource "azurerm_sql_server" "heroes_db_server" {
 }
 
 resource "azurerm_mssql_database" "heroes_db" {
-  name           = "josh_heroes_db_123"
+  name           = "josh-heroes-db-123"
   server_id      = azurerm_sql_server.heroes_db_server.id
   sku_name       = "Basic"
 }
