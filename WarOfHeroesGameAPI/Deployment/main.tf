@@ -47,12 +47,14 @@ resource "azurerm_app_service" "heroes_app_service" {
     }
     connection_string {
       name = "HeroDb"
-      value = azurerm_sql_server.heroes_db.connection_string
+      value = "Server=tcp:${azurerm_sql_server.heroes_db_server.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_sql_database.heroes_db.name};Persist Security Info=False;User ID=${azurerm_sql_server.heroes_db_server.administrator_login};Password=${azurerm_sql_server.heroes_db_server.administrator_login_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
     }
 }
 
-resource "azurerm_sql_server" "heroes_db" {
-  name                         = "heroesdb"
+
+
+resource "azurerm_sql_server" "heroes_db_server" {
+  name                         = "heroesdbserver"
   resource_group_name          = azurerm_resource_group.rg.name
   location                     = azurerm_resource_group.rg.location
   version                      = "12.0"
@@ -62,4 +64,10 @@ resource "azurerm_sql_server" "heroes_db" {
   tags = {
     environment = "production"
   }
+}
+
+resource "azurerm_mssql_database" "heroes_db" {
+  name           = "heroesdb"
+  server_id      = azurerm_sql_server.heroes_db_server.id
+  sku_name       = "Basic"
 }
