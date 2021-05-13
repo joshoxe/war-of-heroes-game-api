@@ -56,7 +56,8 @@ resource "azurerm_app_service" "heroes_app_service" {
 resource "azurerm_sql_server" "heroes_db_server" {
   name                         = "heroesdbserver"
   resource_group_name          = azurerm_resource_group.rg.name
-  location                     = "UK South"
+  location                     = "East US"
+  version                      = "12.0"
   administrator_login          = var.DB_USERNAME
   administrator_login_password = var.DB_PASSWORD
 
