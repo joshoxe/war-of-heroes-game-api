@@ -32,12 +32,7 @@ stages:
         steps:
         - checkout: self
         - script: |
-            echo "Subscription ID $(SUBSCRIPTION-ID)"
-            echo "Tenant ID  $(TERRAFORM-TENANT-ID)"
-            echo "Client ID  $(TERRAFORM-CLIENT-ID)"
-            echo "Access Key  $(TF-ACCESS-KEY)"
-            echo "Client Secret $(TERRAFORM-CLIENT-SECRET)"
-            terraform init
+            terraform init 
             terraform plan
             terraform apply -auto-approve
           workingDirectory: "$(System.DefaultWorkingDirectory)/WarOfHeroesGameAPI/Deployment/"
@@ -47,6 +42,8 @@ stages:
             ARM_ACCESS_KEY: $(TF-ACCESS-KEY)        
             ARM_CLIENT_ID: $(TERRAFORM-CLIENT-ID)
             ARM_CLIENT_SECRET: $(TERRAFORM-CLIENT-SECRET)
+            TF_VAR_DB_USERNAME: $(DbUsername)
+            TF_VAR_DB_PASSWORD: $(DbPassword)
         - task: DownloadPipelineArtifact@2
           inputs:
               buildType: "current"
@@ -55,7 +52,7 @@ stages:
         - task: AzureRmWebAppDeployment@4
           inputs:
               ConnectionType: "AzureRM"
-              azureSubscription: "warOfHeroes"
+              azureSubscription: "warOfHeroesHeroes"
               appType: "webApp"
               WebAppName: "warOfHeroesHeroes"
               packageForLinux: "$(System.DefaultWorkingDirectory)/WarOfHeroesGameAPI.zip"
