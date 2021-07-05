@@ -20,7 +20,7 @@ namespace WarOfHeroesGameAPI.Data
 
         public IEnumerable<Hero> GetHeroesById(IEnumerable<int> ids)
         {
-            return _context.Heroes.Where(h => ids.Contains(h.Id)).ToList();
+            return ids.Select(id => _context.Heroes.FirstOrDefault(h => h.Id == id));
         }
 
         public IEnumerable<Hero> GetAllHeroes()
