@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WarOfHeroesGameAPI.Data;
 
 namespace WarOfHeroesGameAPI.Migrations
 {
     [DbContext(typeof(HeroContext))]
-    partial class HeroContextModelSnapshot : ModelSnapshot
+    [Migration("20210819100849_NewCombat")]
+    partial class NewCombat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,32 +37,6 @@ namespace WarOfHeroesGameAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ability");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 5,
-                            Type = "Attack"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 15,
-                            Type = "Attack"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 2,
-                            Type = "Attack"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = 30,
-                            Type = "Attack"
-                        });
                 });
 
             modelBuilder.Entity("WarOfHeroesGameAPI.Data.Entities.Hero", b =>
