@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WarOfHeroesGameAPI.Data.Entities;
 
 namespace WarOfHeroesGameAPI.Data
@@ -15,17 +16,17 @@ namespace WarOfHeroesGameAPI.Data
 
         public Hero GetHeroById(int id)
         {
-            return _context.Heroes.FirstOrDefault(h => h.Id == id);
+            return _context.Heroes.Include(h => h.Ability).FirstOrDefault(h => h.Id == id);
         }
 
         public IEnumerable<Hero> GetHeroesById(IEnumerable<int> ids)
         {
-            return ids.Select(id => _context.Heroes.FirstOrDefault(h => h.Id == id));
+            return ids.Select(id => _context.Heroes.Include(h => h.Ability).FirstOrDefault(h => h.Id == id));
         }
 
         public IEnumerable<Hero> GetAllHeroes()
         {
-            return _context.Heroes.ToList();
+            return _context.Heroes.Include(h => h.Ability).ToList();
         }
     }
 }

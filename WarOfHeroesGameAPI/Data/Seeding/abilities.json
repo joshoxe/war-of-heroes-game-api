@@ -18,5 +18,20 @@
     "Id": 4,
     "Type": "Attack",
     "Amount": 30
+  },
+  {
+    "Id": 5,
+    "Type": "Attack",
+    "Amount": 30
+  },
+  {
+    "Id": 6,
+    "Type": "Attack",
+    "Amount": 30
+  },
+  {
+    "Id": 7,
+    "Type": "Attack",
+    "Amount": 30
   }
 ]
