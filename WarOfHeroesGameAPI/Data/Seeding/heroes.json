@@ -2,55 +2,37 @@
   {
     "Id": 1,
     "Name": "Taron",
-    "Ability": {
-      "Type": "Attack",
-      "Amount": 5 
-    },
+    "AbilityId": 1,
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 2,
     "Name": "Groth Nightmore",
-    "Ability": {
-      "Type": "Attack",
-      "Amount": 15
-    },
+    "AbilityId,": 2,
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 3,
     "Name": "Sin Deruv",
-    "Ability": {
-      "Type": "Attack",
-      "Amount": 2
-    },
+    "AbilityId": 3, 
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 4,
     "Name": "Tegril",
-    "Ability": {
-      "Type": "Attack",
-      "Amount": 30
-    },
+    "AbilityId,": 4,
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 5,
     "Name": "Warsa",
-    "Ability": {
-      "Type": "Attack",
-      "Amount": 5
-    },
+    "AbilityId,": 1,
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 6,
     "Name": "Edam",
-    "Ability": {
-      "Type": "Attack",
-      "Amount": 5
-    },
+    "AbilityId": 1, 
     "Description": "A basic hero with a basic description."
   }
 ]
