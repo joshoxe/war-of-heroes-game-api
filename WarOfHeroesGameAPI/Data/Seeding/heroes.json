@@ -2,49 +2,55 @@
   {
     "Id": 1,
     "Name": "Taron",
-    "AttackDamage": 3,
-    "UltimateAttackName": "Hammer Smash",
-    "UltimateAttackDamage": 15,
-    "Description": "A basic hero with a basic description. His friendly manner will lure enemies into a false sense of security, stopping their attacks"
+    "Ability": {
+      "Type": "Attack",
+      "Amount": 5 
+    },
+    "Description": "A basic hero with a basic description."
   },
   {
     "Id": 2,
     "Name": "Groth Nightmore",
-    "AttackDamage": 5,
-    "UltimateAttackName": "Headbutt",
-    "UltimateAttackDamage": 10,
+    "Ability": {
+      "Type": "Attack",
+      "Amount": 15
+    },
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 3,
     "Name": "Sin Deruv",
-    "AttackDamage": 3,
-    "UltimateAttackName": "Back Stab",
-    "UltimateAttackDamage": 25,
+    "Ability": {
+      "Type": "Attack",
+      "Amount": 2
+    },
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 4,
     "Name": "Tegril",
-    "AttackDamage": 7,
-    "UltimateAttackName": "Lightning Strike",
-    "UltimateAttackDamage": 30,
+    "Ability": {
+      "Type": "Attack",
+      "Amount": 30
+    },
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 5,
     "Name": "Warsa",
-    "AttackDamage": 10,
-    "UltimateAttackName": "War Cry",
-    "UltimateAttackDamage": 40,
+    "Ability": {
+      "Type": "Attack",
+      "Amount": 5
+    },
     "Description": "A basic hero with a basic description."
   },
   {
     "Id": 6,
     "Name": "Edam",
-    "AttackDamage": 5,
-    "UltimateAttackName": "Poison Strike",
-    "UltimateAttackDamage": 18,
+    "Ability": {
+      "Type": "Attack",
+      "Amount": 5
+    },
     "Description": "A basic hero with a basic description."
   }
 ]
