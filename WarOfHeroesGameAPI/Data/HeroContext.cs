@@ -20,6 +20,7 @@ namespace WarOfHeroesGameAPI.Data
             _config = config;
         }
         public DbSet<Hero> Heroes { get; set; }
+        public virtual DbSet<Ability> Ability { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,15 +31,15 @@ namespace WarOfHeroesGameAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Hero>().HasData(GetData());
+            modelBuilder.Entity<Hero>().HasData(GetData<Hero>("./Data/Seeding/heroes.json"));
+            modelBuilder.Entity<Ability>().HasData(GetData<Ability>("./Data/Seeding/abilities.json"));
         }
-        private static IEnumerable<Hero> GetData() {
+        private static IEnumerable<T> GetData<T>(string filepath) {
+;
+            var json = File.ReadAllText(filepath);
+            var data = JsonSerializer.Deserialize<IEnumerable<T>>(json);
 
-            const string filePath = "./Data/Seeding/heroes.json";
-            var json = File.ReadAllText(filePath);
-            var heroes = JsonSerializer.Deserialize<IEnumerable<Hero>>(json);
-
-            return heroes;
+            return data;
         }
     }
 }
