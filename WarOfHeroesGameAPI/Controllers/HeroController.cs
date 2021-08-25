@@ -77,5 +77,21 @@ namespace WarOfHeroesGameAPI.Controllers
                 return BadRequest("An error occurred trying to retrieve heroes");
             }
         }
+
+        [Route("/hero/packs/{amount}")]
+        [HttpGet]
+        public ActionResult GetPack([FromRoute] int amount)
+        {
+            try
+            {
+                var heroesBought = _repository.GetRandomHeroes(amount);
+                return Ok(heroesBought);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred getting a pack of {amount} heroes", amount);
+                return BadRequest($"Couldn't buy pack of {amount} heroes");
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WarOfHeroesGameAPI.Data.Entities;
@@ -27,6 +28,17 @@ namespace WarOfHeroesGameAPI.Data
         public IEnumerable<Hero> GetAllHeroes()
         {
             return _context.Heroes.Include(h => h.Ability).ToList();
+        }
+
+        public IEnumerable<Hero> GetRandomHeroes(int amount)
+        {
+            var random = new Random();
+            int max = _context.Heroes.Count();
+            for (var i = 0; i < amount; i++)
+            {
+                var next = random.Next(1, max);
+                yield return _context.Heroes.SingleOrDefault(x => x.Id == next);
+            }
         }
     }
 }
