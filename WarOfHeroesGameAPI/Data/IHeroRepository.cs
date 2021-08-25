@@ -8,5 +8,6 @@ namespace WarOfHeroesGameAPI.Data
         Hero GetHeroById(int id);
         IEnumerable<Hero> GetHeroesById(IEnumerable<int> ids);
         IEnumerable<Hero> GetAllHeroes();
+        IEnumerable<Hero> GetRandomHeroes(int amount);
     }
 }
